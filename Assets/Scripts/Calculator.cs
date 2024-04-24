@@ -16,4 +16,16 @@ public static class Calculator
     {
         return Vector3.Distance(GetPositionFromMatrix(obj), GetPositionFromMatrix(point));
     }
+
+    public static Vector2[] GetNodesPosition(Vector3 position)
+    {
+        Vector2[] nodes = new Vector2[4];
+
+        nodes[0] = new Vector2(position.x, position.y + distance * 2f);
+        nodes[1] = new Vector2(position.x + distance * 2f, position.y);
+        nodes[2] = new Vector2(position.x, position.y - distance * 2f);
+        nodes[3] = new Vector2(position.x - distance * 2f, position.y);
+
+        return nodes;
+    }
 }

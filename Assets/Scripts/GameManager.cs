@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     private int[,] GameMatrix; //0 not chosen, 1 player, 2 enemy
     private int[] startPos = new int[2];
     private int[] objectivePos = new int[2];
+
+    private int[] test = { 1, 1 };
+
     private void Awake()
     {
         GameMatrix = new int[Calculator.length, Calculator.length];
@@ -31,6 +34,16 @@ public class GameManager : MonoBehaviour
         ShowMatrix();
 
 
+    }
+
+    private void Start()
+    {
+        ASDW nodes = new ASDW(Calculator.GetPositionFromMatrix(startPos));
+
+        Instantiate(token3, nodes.Nodes[0], Quaternion.identity);
+        Instantiate(token3, nodes.Nodes[1], Quaternion.identity);
+        Instantiate(token3, nodes.Nodes[2], Quaternion.identity);
+        Instantiate(token3, nodes.Nodes[3], Quaternion.identity);
     }
     private void InstantiateToken(GameObject token, int[] position)
     {
