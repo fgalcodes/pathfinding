@@ -18,6 +18,9 @@ public class ASDW
         foreach (var item in Nodes)
         {
             Debug.Log(item);
+            int[] itemParse = { (int)item.x, (int)item.y};
+            Debug.Log(Calculator.GetPositionFromMatrix(itemParse));
+            Debug.Log("culo");
             
         }
     }
