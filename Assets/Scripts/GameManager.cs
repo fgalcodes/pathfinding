@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GameManager : MonoBehaviour
 {
     public GameObject token1, token2, token3;
@@ -38,12 +39,25 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        ASDW nodes = new ASDW(Calculator.GetPositionFromMatrix(startPos));
+        ASDW nodesPos = new ASDW(Calculator.GetPositionFromMatrix(startPos));
 
-        Instantiate(token3, nodes.Nodes[0], Quaternion.identity);
-        Instantiate(token3, nodes.Nodes[1], Quaternion.identity);
-        Instantiate(token3, nodes.Nodes[2], Quaternion.identity);
-        Instantiate(token3, nodes.Nodes[3], Quaternion.identity);
+        Instantiate(token3, nodesPos.Nodes[0], Quaternion.identity);
+        Instantiate(token3, nodesPos.Nodes[1], Quaternion.identity);
+        Instantiate(token3, nodesPos.Nodes[2], Quaternion.identity);
+        Instantiate(token3, nodesPos.Nodes[3], Quaternion.identity);
+
+        for (int i = 0; i < nodesPos.Nodes.Length; i++)
+        {
+            Debug.Log("Node " + i + " Position is: " + nodesPos.Nodes[i] + ".");
+
+            int[] nodeParse = { (int)nodesPos.Nodes[i].x, (int)nodesPos.Nodes[i].y };
+            Debug.Log(nodeParse[0] +  ", " + nodeParse[1]);
+
+            Debug.Log("Distance to end position is: " + Calculator.CheckDistanceToObj(nodeParse, objectivePos));
+
+            nodesPos.Heuristic[i] = Calculator.CheckDistanceToObj(nodeParse, objectivePos);
+            nodesPos.Cost[i] = Calculator.CheckDistanceToObj(nodeParse, objectivePos) + Calculator.distance * 2f;
+        }
     }
     private void InstantiateToken(GameObject token, int[] position)
     {

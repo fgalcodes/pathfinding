@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ASDW
 {
-    public int Heuristic { get; set; }
-    public int Cost { get; set; }
+    public float[] Heuristic { get; set; } = new float[4];
+    public float[] Cost { get; set; } = new float[4];
     public ASDW Father { get; set; }
     public Vector2[] Nodes { get; set; }
 
@@ -13,7 +13,7 @@ public class ASDW
     {
         Debug.Log("Instantiate");
 
-        Nodes = Calculator.GetNodesPosition (position);
+        Nodes = Calculator.GetNodesPosition(position);
 
         foreach (var item in Nodes)
         {
