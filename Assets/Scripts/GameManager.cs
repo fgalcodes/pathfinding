@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     private int[] test = { 1, 1 };
 
+    private Vector3[] nodesTablePosition = new Vector3[4];
+
     private void Awake()
     {
         GameMatrix = new int[Calculator.length, Calculator.length];
@@ -48,15 +50,7 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < nodesPos.Nodes.Length; i++)
         {
-            Debug.Log("Node " + i + " Position is: " + nodesPos.Nodes[i] + ".");
-
-            int[] nodeParse = { (int)nodesPos.Nodes[i].x, (int)nodesPos.Nodes[i].y };
-            Debug.Log(nodeParse[0] +  ", " + nodeParse[1]);
-
-            Debug.Log("Distance to end position is: " + Calculator.CheckDistanceToObj(nodeParse, objectivePos));
-
-            nodesPos.Heuristic[i] = Calculator.CheckDistanceToObj(nodeParse, objectivePos);
-            nodesPos.Cost[i] = Calculator.CheckDistanceToObj(nodeParse, objectivePos) + Calculator.distance * 2f;
+            nodesTablePosition = Calculator.GetPositionFromMatrix(nodesPos.Nodes[i]);
         }
     }
     private void InstantiateToken(GameObject token, int[] position)
